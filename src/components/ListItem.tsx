@@ -1,8 +1,9 @@
 import React from 'react'
 
-function ListItem () {
+
+function ListItem ({children} : any) {
     return(
-        <li>List item</li>
+        <li>{children}</li>
     )
 }
 
