@@ -1,0 +1,12 @@
+version: "3.8"
+services: 
+  app: 
+    build: 
+      context: .
+    volumes:
+      - .:/core
+    ports:
+      - 8080:8080
+    image: app:cat-list-c
+    container_name: cat-list_container
+    command: npm start
