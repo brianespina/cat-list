@@ -1,37 +1,40 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import AppTitle from "./AppTitle";
 import ListItem from "./ListItem";
 import { ListWrap } from "./ListWrap";
+import { AddItem } from "./AddItem";
+import {collection, getDocs} from 'firebase/firestore'
 import db from '../firebase'
-import { addDoc, collection } from "firebase/firestore";
 
 const App = () => {
 
-    const addTodo = async () => {
+    const [items, setItems] = useState({})
 
-
-        // try {
-        //     const docRef = await addDoc(collection(db, "todo"), {
-        //         todo: "test23"
-        //     })
-        //     console.log(docRef)
-        // } catch (error) {
-        //     console.log("error adding document", error)
-        // }
-    } 
+    const fetchItems = async () => {
+        try{
+            const snapshot = await getDocs(collection(db, 'resource'))
+            
+            console.log(snapshot)
+        }catch(e){
+            console.error(e);
+        }
+       
+    }
 
     useEffect(()=>{
-        addTodo()
+        fetchItems()
     }, [])
+
     return (
         <div>
             <AppTitle>Category Listing</AppTitle>
             <ListWrap>
                 <ListItem>
-                    Testing template
+                    list item
                 </ListItem>
-            </ListWrap>
-            
+            </ListWrap>      
+
+            <AddItem />   
         </div>
     )
 }
